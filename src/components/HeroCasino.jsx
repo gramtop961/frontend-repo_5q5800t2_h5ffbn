@@ -9,7 +9,7 @@ export default function HeroCasino() {
       <div className="relative h-[52vh] sm:h-[60vh]">
         {/* 3D Scene */}
         <div className="absolute inset-0">
-          <Spline scene="https://prod.spline.design/G0i6ZIv4Vd1oW14L/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+          <Spline scene="https://prod.spline.design/atN3lqky4IzF-KEP/scene.splinecode" style={{ width: '100%', height: '100%' }} />
         </div>
 
         {/* Overlay gradients that don't block pointer events */}
