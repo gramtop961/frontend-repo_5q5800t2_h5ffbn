@@ -22,21 +22,21 @@ export default function HeroCasino() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-black/40 px-3 py-1 text-xs text-amber-200 mb-4">
                 <Crown className="h-3.5 w-3.5" />
-                Premium Casino Experience
+                Marka Ortaklıkları • Premium Vitrin
               </div>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-                Spin. Play. Win.
+                Keşfet. Tıkla. Markanı Büyüt.
               </h1>
               <p className="mt-3 sm:mt-4 text-zinc-300 max-w-xl">
-                Seamless gameplay, instant rewards, and a luxury dark theme. Where high rollers meet impeccable design.
+                En iyi sponsor anlaşmaları ve partner markaları tek yerde. Zarif koyu tema, pürüzsüz animasyonlar ve yüksek dönüşüm odaklı akış.
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <motion.button whileTap={{ scale: 0.98 }} className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 to-fuchsia-500 px-5 py-3 text-black font-semibold">
-                  <Rocket className="h-5 w-5" /> Play Now
+                  <Rocket className="h-5 w-5" /> Kampanyaları Gör
                 </motion.button>
                 <motion.button whileTap={{ scale: 0.98 }} className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 bg-black/50 px-5 py-3 text-white">
-                  Browse Games
+                  Sponsor Ol
                 </motion.button>
               </div>
             </motion.div>

@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { Gift, Trophy, Star, Coins } from 'lucide-react';
 
 const items = [
-  { icon: Gift, text: 'Daily Drops $500+' },
-  { icon: Coins, text: '10% Cashback' },
-  { icon: Trophy, text: 'Weekend Tournaments' },
-  { icon: Star, text: 'VIP Lounge Access' },
+  { icon: Gift, text: 'Özel Kuponlar ve Kodlar' },
+  { icon: Coins, text: '%10-20 Komisyon Oranları' },
+  { icon: Trophy, text: 'Performans Bazlı Bonuslar' },
+  { icon: Star, text: 'Seçkin Marka İşbirlikleri' },
 ];
 
 export default function PromoMarquee() {
