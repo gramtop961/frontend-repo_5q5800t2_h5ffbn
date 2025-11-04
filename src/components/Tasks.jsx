@@ -1,12 +1,18 @@
 import { useState } from 'react'
-import { CheckCircle2, ExternalLink, Gift, Users } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { CheckCircle2, ExternalLink, Gift } from 'lucide-react'
 
 function Section({ title, children }) {
   return (
-    <div className="rounded-2xl border bg-white p-4 shadow-sm">
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="rounded-2xl border bg-white p-4 shadow-sm"
+    >
       <h3 className="font-semibold mb-3">{title}</h3>
       <div className="space-y-3">{children}</div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -22,13 +28,21 @@ function TaskRow({ title, subtitle, actionText, onAction, secondary }) {
       </div>
       <div className="flex gap-2">
         {secondary && (
-          <button onClick={secondary.onClick} className="px-3 py-2 text-sm rounded-lg border text-gray-700 hover:bg-gray-50">
+          <motion.button
+            whileTap={{ scale: 0.96 }}
+            className="px-3 py-2 text-sm rounded-lg border text-gray-700 hover:bg-gray-50"
+            onClick={secondary.onClick}
+          >
             {secondary.label}
-          </button>
+          </motion.button>
         )}
-        <button onClick={onAction} className="px-3 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white">
+        <motion.button
+          whileTap={{ scale: 0.96 }}
+          className="px-3 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white"
+          onClick={onAction}
+        >
           {actionText}
-        </button>
+        </motion.button>
       </div>
     </div>
   )
@@ -64,7 +78,11 @@ export default function Tasks() {
           title="İlk Referansını Getir"
           subtitle="10 arkadaşını davet et ve +200 Token kazan"
           actionText="Davet Linki"
-          onAction={() => navigator.clipboard.writeText('https://t.me/yourbot?start=ref123').then(() => alert('Davet linki kopyalandı'))}
+          onAction={() =>
+            navigator.clipboard
+              .writeText('https://t.me/yourbot?start=ref123')
+              .then(() => alert('Davet linki kopyalandı'))
+          }
           secondary={{ label: 'Onayla', onClick: () => openForm('daily-ref') }}
         />
       </Section>
@@ -73,7 +91,9 @@ export default function Tasks() {
         <TaskRow
           title="Belirlenen siteye kayıt ol"
           subtitle="Tamamlayınca +400 Token"
-          actionText={<span className="inline-flex items-center gap-1">Göreve Git <ExternalLink size={14} /></span>}
+          actionText={
+            <span className="inline-flex items-center gap-1">Göreve Git <ExternalLink size={14} /></span>
+          }
           onAction={() => window.open('https://example.com', '_blank')}
           secondary={{ label: 'Tamamla', onClick: () => openForm('sponsor') }}
         />
@@ -85,55 +105,101 @@ export default function Tasks() {
             <p className="font-medium">Arkadaşlarını Davet Et Token Kazan!</p>
             <p className="text-sm text-gray-500">Davet eden: +5 Token • Davet edilen: +25 Token</p>
           </div>
-          <button
+          <motion.button
+            whileTap={{ scale: 0.96 }}
             className="px-3 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white"
-            onClick={() => navigator.clipboard.writeText('https://t.me/yourbot?start=ref123').then(() => alert('Referans linkin kopyalandı'))}
+            onClick={() =>
+              navigator.clipboard
+                .writeText('https://t.me/yourbot?start=ref123')
+                .then(() => alert('Referans linkin kopyalandı'))
+            }
           >
             Linki Kopyala
-          </button>
+          </motion.button>
         </div>
       </Section>
 
-      {modal && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40">
-          <div className="w-full max-w-md bg-white rounded-t-2xl p-5 space-y-3">
-            <div className="flex items-center justify-between">
-              <h4 className="font-semibold">Bilgileri Doldur</h4>
-              <button onClick={() => setModal(null)} className="text-gray-500">✕</button>
-            </div>
-
-            {modal === 'purchase' && (
-              <div className="grid grid-cols-3 gap-2">
-                {[1,2,3,5,10].map((n) => (
-                  <button key={n} onClick={() => setForm({ ...form, amount: n })} className={`py-2 rounded-lg border ${form.amount === n ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-50 hover:bg-gray-100'}`}>{n} Adet</button>
-                ))}
+      <AnimatePresence>
+        {modal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-end justify-center bg-black/40"
+          >
+            <motion.div
+              initial={{ y: 40 }}
+              animate={{ y: 0 }}
+              exit={{ y: 40 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+              className="w-full max-w-md bg-white rounded-t-2xl p-5 space-y-3"
+            >
+              <div className="flex items-center justify-between">
+                <h4 className="font-semibold">Bilgileri Doldur</h4>
+                <button onClick={() => setModal(null)} className="text-gray-500">✕</button>
               </div>
-            )}
 
-            {modal === 'sponsor' && (
-              <div>
-                <label className="text-sm text-gray-600">Site Adı</label>
-                <input value={form.site} onChange={(e) => setForm({ ...form, site: e.target.value })} className="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Örn: Gamdom" />
-              </div>
-            )}
+              {modal === 'purchase' && (
+                <div className="grid grid-cols-3 gap-2">
+                  {[1, 2, 3, 5, 10].map((n) => (
+                    <button
+                      key={n}
+                      onClick={() => setForm({ ...form, amount: n })}
+                      className={`py-2 rounded-lg border ${
+                        form.amount === n
+                          ? 'bg-blue-600 text-white border-blue-600'
+                          : 'bg-gray-50 hover:bg-gray-100'
+                      }`}
+                    >
+                      {n} Adet
+                    </button>
+                  ))}
+                </div>
+              )}
 
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="text-sm text-gray-600">Kullanıcı Adı</label>
-                <input value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} className="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="telegram kullanıcı adı" />
-              </div>
-              <div>
-                <label className="text-sm text-gray-600">User ID</label>
-                <input value={form.userId} onChange={(e) => setForm({ ...form, userId: e.target.value })} className="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="örn: 123456" />
-              </div>
-            </div>
+              {modal === 'sponsor' && (
+                <div>
+                  <label className="text-sm text-gray-600">Site Adı</label>
+                  <input
+                    value={form.site}
+                    onChange={(e) => setForm({ ...form, site: e.target.value })}
+                    className="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Örn: Gamdom"
+                  />
+                </div>
+              )}
 
-            <button onClick={submit} className="w-full flex items-center justify-center gap-2 bg-green-600 text-white py-2.5 rounded-lg font-medium">
-              <CheckCircle2 size={18} /> Gönder
-            </button>
-          </div>
-        </div>
-      )}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-sm text-gray-600">Kullanıcı Adı</label>
+                  <input
+                    value={form.username}
+                    onChange={(e) => setForm({ ...form, username: e.target.value })}
+                    className="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="telegram kullanıcı adı"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm text-gray-600">User ID</label>
+                  <input
+                    value={form.userId}
+                    onChange={(e) => setForm({ ...form, userId: e.target.value })}
+                    className="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="örn: 123456"
+                  />
+                </div>
+              </div>
+
+              <button
+                onClick={submit}
+                className="w-full flex items-center justify-center gap-2 bg-green-600 text-white py-2.5 rounded-lg font-medium"
+              >
+                <CheckCircle2 size={18} /> Gönder
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
