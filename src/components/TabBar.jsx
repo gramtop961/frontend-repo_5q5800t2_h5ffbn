@@ -5,7 +5,7 @@ function TabButton({ label, icon: Icon, active, onClick }) {
     <button
       onClick={onClick}
       className={`flex flex-col items-center justify-center gap-1 flex-1 py-2 rounded-xl transition-colors ${
-        active ? 'text-white bg-blue-600' : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+        active ? 'text-black bg-white' : 'text-zinc-400 hover:text-white hover:bg-white/10'
       }`}
     >
       <Icon size={20} />
@@ -16,8 +16,8 @@ function TabButton({ label, icon: Icon, active, onClick }) {
 
 export default function TabBar({ current, onChange }) {
   return (
-    <div className="fixed bottom-4 left-0 right-0 mx-auto max-w-md px-4">
-      <div className="backdrop-blur bg-white/80 border border-gray-200 rounded-2xl shadow-lg p-2 flex gap-2">
+    <div className="fixed bottom-4 left-0 right-0 mx-auto max-w-md px-4 z-50">
+      <div className="backdrop-blur bg-white/5 border border-white/10 rounded-2xl shadow-lg p-2 flex gap-2">
         <TabButton label="Ana Sayfa" icon={Home} active={current === 'home'} onClick={() => onChange('home')} />
         <TabButton label="Görevler" icon={ListChecks} active={current === 'tasks'} onClick={() => onChange('tasks')} />
         <TabButton label="Mağaza" icon={ShoppingBag} active={current === 'store'} onClick={() => onChange('store')} />

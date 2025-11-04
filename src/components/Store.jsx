@@ -8,22 +8,22 @@ function ProductCard({ title, desc, price, onBuy }) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45 }}
-      className="rounded-2xl border bg-white p-4 shadow-sm flex items-start gap-3"
+      className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4 shadow-sm flex items-start gap-3"
     >
-      <div className="h-12 w-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+      <div className="h-12 w-12 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
         <BadgeCheck size={22} />
       </div>
       <div className="flex-1">
-        <p className="font-semibold">{title}</p>
-        <p className="text-sm text-gray-500">{desc}</p>
+        <p className="font-semibold text-white">{title}</p>
+        <p className="text-sm text-zinc-400">{desc}</p>
         <div className="mt-3 flex items-center justify-between">
-          <p className="text-sm font-medium text-gray-700 inline-flex items-center gap-1">
+          <p className="text-sm font-medium text-zinc-200 inline-flex items-center gap-1">
             <Coins size={16} /> {price} Token
           </p>
           <motion.button
             whileTap={{ scale: 0.96 }}
             onClick={onBuy}
-            className="px-3 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white"
+            className="px-3 py-2 text-sm font-medium rounded-lg bg-white text-black"
           >
             Satın Al
           </motion.button>
@@ -59,18 +59,18 @@ export default function Store() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-end justify-center bg-black/40"
+            className="fixed inset-0 z-50 flex items-end justify-center bg-black/60"
           >
             <motion.div
               initial={{ y: 40 }}
               animate={{ y: 0 }}
               exit={{ y: 40 }}
               transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-              className="w-full max-w-md bg-white rounded-t-2xl p-5 space-y-3"
+              className="w-full max-w-md bg-zinc-900 border border-zinc-800 rounded-t-2xl p-5 space-y-3 text-white"
             >
               <div className="flex items-center justify-between">
                 <h4 className="font-semibold">Satın Alma</h4>
-                <button onClick={() => setOpen(false)} className="text-gray-500">✕</button>
+                <button onClick={() => setOpen(false)} className="text-zinc-400">✕</button>
               </div>
 
               <div className="grid grid-cols-5 gap-2">
@@ -80,8 +80,8 @@ export default function Store() {
                     onClick={() => setForm({ ...form, amount: n })}
                     className={`py-2 rounded-lg border ${
                       form.amount === n
-                        ? 'bg-blue-600 text-white border-blue-600'
-                        : 'bg-gray-50 hover:bg-gray-100'
+                        ? 'bg-white text-black border-white'
+                        : 'border-zinc-700 bg-zinc-800 hover:bg-zinc-700'
                     }`}
                   >
                     {n}x
@@ -91,20 +91,20 @@ export default function Store() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-sm text-gray-600">Kullanıcı Adı</label>
+                  <label className="text-sm text-zinc-400">Kullanıcı Adı</label>
                   <input
                     value={form.username}
                     onChange={(e) => setForm({ ...form, username: e.target.value })}
-                    className="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="mt-1 w-full border border-zinc-700 bg-zinc-800 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-white/30"
                     placeholder="telegram kullanıcı adı"
                   />
                 </div>
                 <div>
-                  <label className="text-sm text-gray-600">User ID</label>
+                  <label className="text-sm text-zinc-400">User ID</label>
                   <input
                     value={form.userId}
                     onChange={(e) => setForm({ ...form, userId: e.target.value })}
-                    className="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="mt-1 w-full border border-zinc-700 bg-zinc-800 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-white/30"
                     placeholder="örn: 123456"
                   />
                 </div>
@@ -112,7 +112,7 @@ export default function Store() {
 
               <button
                 onClick={submit}
-                className="w-full bg-green-600 text-white py-2.5 rounded-lg font-medium"
+                className="w-full bg-emerald-500 text-black py-2.5 rounded-lg font-medium"
               >
                 Satın Almayı Tamamla
               </button>
